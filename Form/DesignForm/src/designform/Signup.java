@@ -9,6 +9,15 @@ package designform;
  *
  * @author dinhhang
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
 public class Signup extends javax.swing.JFrame {
 
     /**
@@ -17,6 +26,14 @@ public class Signup extends javax.swing.JFrame {
     public Signup() {
         initComponents();
     }
+}
+String driver= "com.microsoft.sqlserver.jdbo.SQLServerDriver";
+String url= "jdbo:sqlserver://localhost:1433:databaseName='Ecommerce";
+String user="sa";
+String password= "sa";
+Statement st;
+ResultSet rs;
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -199,6 +216,39 @@ public class Signup extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        try{
+            Class.forName(driver);
+            Connection con= DriverManager.getConnection(url, user, password);
+            String sql="insert into USER values(?,?)";
+            PreparedStatement ps= con.prepareCall(sql);
+            ps.setString(1, jTextField2.getText());
+            ps.setString(2, jTextField1.getText());
+            int n= ps.executeUpdate();
+
+
+            if(jTextField2.getText().equals("")||jTextField1.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Please Enter User Information");
+
+
+
+            }
+            else if(n!=0){
+                JOptionPane.showMessageDialog(this,"Register Sucessfully");
+                Login LoginFrame= new Login();
+                LoginFrame.setVisible(true);
+                LoginFrame.setVisible(true);
+                LoginFrame.setLocationRelativeTo(null);
+                this.dispose();
+    
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Register Unsucessfully");
+            }
+        }
+        catch(Exception e){
+
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

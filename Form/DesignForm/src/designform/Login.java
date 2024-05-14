@@ -8,15 +8,35 @@ package designform;
 /**
  *
  * @author dinhhang
+ * 
+ * 
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
-     */
+     */ 
     public Login() {
         initComponents();
     }
+    String driver= "com.microsoft.sqlserver.jdbo.SQLServerDriver";
+    String url= "jdbo:sqlserver://localhost:1433:databaseName='Ecommerce";
+    String user="sa";
+    String password= "sa";
+    Statement st;
+    ResultSet rs;
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,8 +92,8 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(40, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Email");
-        jLabel2.setToolTipText("Email");
+        jLabel2.setText("CID");
+        jLabel2.setToolTipText("CID");
         jLabel2.setPreferredSize(new java.awt.Dimension(50, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -196,6 +216,33 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
+            Class.forName(driver);
+            Connection con= DriverManager.getConnection(url, user, password);
+            String sql= "select*from User where CID=? and Pass=?";
+            PreparedStatement ps= con.prepareCall(sql);
+            ps.setString(1, jTextField2.getText());
+            ps.setString(2, jTextField1.getText());
+            rs= ps.executeQuery();
+            
+            if(jTextField2.getText().equals("")||jTextField1.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Please Enter User Information");
+
+
+
+            }
+            else if(rs.next()){
+                JOptionPane.showMessageDialog(this,"Login Sucessfully");
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Login Unsucessfully");
+            }
+
+        }
+        catch (Exception e){
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
