@@ -26,7 +26,7 @@ public class Signup extends javax.swing.JFrame {
     public Signup() {
         initComponents();
     }
-}
+
 String driver= "com.microsoft.sqlserver.jdbo.SQLServerDriver";
 String url= "jdbo:sqlserver://localhost:1433:databaseName='Ecommerce";
 String user="sa";

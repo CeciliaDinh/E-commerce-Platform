@@ -92,8 +92,8 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(40, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("CID");
-        jLabel2.setToolTipText("CID");
+        jLabel2.setText("Email");
+        jLabel2.setToolTipText("Email");
         jLabel2.setPreferredSize(new java.awt.Dimension(50, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
