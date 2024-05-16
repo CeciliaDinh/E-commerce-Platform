@@ -13,24 +13,34 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 import java.awt.List;
+import java.awt.event.ActionEvent;
 import java.util.Random;
 import java.util.ArrayList; 
 import java.util.Collections; 
 import java.util.Random;
 import java.util.Vector;
-
+import javax.swing.table.DefaultTableModel;
 public class AddProduct extends javax.swing.JFrame {
+
+String driver= "com.microsoft.sqlserver.jdbo.SQLServerDriver";
+String url= "jdbo:sqlserver://localhost:1433:databaseName='Ecommerce";
+String user="sa";
+String password= "sa";
+Statement st;
+ResultSet rs;
 
     /**
      * Creates new form AddProduct
      */
     public AddProduct() {
         initComponents();
+    
     }
 
     /**
@@ -200,15 +210,121 @@ public class AddProduct extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtQuantityActionPerformed
 
-    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        // TODO add your handling code here:
-        
-        
+    private void AddButtonActionPerformed(ActionEvent evt, DefaultTableModel model) {
+        // Check if the input fields are empty
+        if (jTxtName.getText().isEmpty() || jTxtQuantity.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please Enter Product Name and Quantity");
+            return;
+        }
+
+        String name = jTxtName.getText();
+        int quantity;
+        try {
+            quantity = Integer.parseInt(jTxtQuantity.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid Quantity. Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Load the database driver
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Ensure you are using the correct driver
+            // Establish the connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "your_username", "your_password");
+
+            // Prepare the SQL select statement
+            String sql = "SELECT ProductID, PName, Price FROM products WHERE PName = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+
+            // Execute the select statement
+            ResultSet rs = ps.executeQuery();
+
+            // Check if any results were returned
+            if (rs.next()) {
+                int productID = rs.getInt("ProductID");
+                String productName = rs.getString("PName");
+                double price = rs.getDouble("Price");
+
+                // Check if the product already exists in the table
+                int rowIndex = findProductIndex(model, productID);
+                if (rowIndex != -1) {
+                    // Update quantity and total price if product already exists
+                    int currentQuantity = (int) model.getValueAt(rowIndex, 3);
+                    model.setValueAt(currentQuantity + quantity, rowIndex, 3); // Update quantity
+                    model.setValueAt((price * (currentQuantity + quantity)), rowIndex, 2); // Update total price
+                } else {
+                    // Add new product to the table
+                    model.addRow(new Object[]{productID, productName, price * quantity, quantity});
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Product Not Found");
+            }
+
+            // Close the ResultSet, statement, and connection
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }
+
+    // Method to find the index of a product in the table model
+    private int findProductIndex(DefaultTableModel model, int productID) {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if ((int) model.getValueAt(i, 0) == productID) {
+                return i;
+            }
+        }
+        return -1; // Product not found
     }//GEN-LAST:event_AddButtonActionPerformed
 
-    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RemoveButtonActionPerformed
+    private void RemoveButtonActionPerformed(ActionEvent evt, DefaultTableModel model) {
+        // Get the name and quantity of the product to remove
+        String name = jTxtName.getText();
+        int quantityToRemove;
+        try {
+            quantityToRemove = Integer.parseInt(jTxtQuantity.getText());
+            if (quantityToRemove <= 0) {
+                JOptionPane.showMessageDialog(this, "Quantity to remove must be a positive number");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid Quantity to remove. Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        int rowIndex = findProductRowIndexByName(model, name);
+        if (rowIndex != -1) {
+            int currentQuantity = (int) model.getValueAt(rowIndex, 3);
+            if (currentQuantity >= quantityToRemove) {
+                int newQuantity = currentQuantity - quantityToRemove;
+                if (newQuantity == 0) {
+                    // If quantity becomes zero, remove the entire row
+                    model.removeRow(rowIndex);
+                } else {
+                    // Update the quantity
+                    model.setValueAt(newQuantity, rowIndex, 3);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Quantity to remove exceeds current quantity of the product");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Product Not Found in the Table");
+        }
+    }
+    
+    // Method to find the index of a product by name in the table model
+    private int findProductRowIndexByName(DefaultTableModel model, String name) {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 1).equals(name)) { // Check product name at column index 1
+                return i;
+            }
+        }
+        return -1; // Product not found
+    }
 
     /**
      * @param args the command line arguments
