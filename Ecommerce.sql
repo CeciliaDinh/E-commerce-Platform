@@ -1,11 +1,11 @@
-IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'EcommerceData')
+IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Ecommerce')
 DROP DATABASE [EcommerceData]
 GO
 CREATE DATABASE EcommerceData
 GO
 
 
-USE [EcommerceData]
+USE [Ecommerce]
 GO
 
 CREATE TABLE [dbo].[Admin]
