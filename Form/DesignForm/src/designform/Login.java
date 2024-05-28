@@ -239,7 +239,7 @@ public class Login extends javax.swing.JFrame {
         try{
             Class.forName(driver);
             Connection con= DriverManager.getConnection(url, user, password);
-            String sql= "select*from User where CID=? and Pass=?";
+            String sql= "select*from User where Phone=? and CPassword=?";
             PreparedStatement ps= con.prepareCall(sql);
             ps.setString(1, jTextField2.getText());
             ps.setString(2, jTextField1.getText());
