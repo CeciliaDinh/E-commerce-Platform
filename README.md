@@ -33,18 +33,38 @@ purchased products, the date of expected delivery, and the form of payment.
 - Please kindly clone this git https://github.com/CeciliaDinh/Principle-Of-Database-Management.git to your computer and then run it as usual
   
 [II. Methodology](#Method)
+- Tools: SQL, Java, JDBC Connection
+- I used SQL to create a database and insert into it with of course, random values
+- JDBC Connection to connect my database with the user interface I built by Java
 
 [III. ERD Design](#erd)
-- [1. Account entity ](#account)
-- [2. Admins entity ](#admin)
-- [3. Employees entity ](#employee)
-- [4. Customers entity ](#customer)
-- [5. Product1 entity ](#product1)
-- [6. Photo weak entity ](#photo)
-- [7. Orders entity ](#order)
-- [8. Product2 entity ](#product2)
-- [9. Relationship ](#relationship)
 
-
+1. **User entity**:
+   - CID (Customer ID)
+   - UID (User ID)
+   - Bname (Business name)
+   - Baccount (Business account)
+   - Phone
+   - CPassWord (Customer password)
+   - Address
+2. **Admins entity**:
+   - AID (Admin ID)
+   - Aname (Admin name)
+   - Email
+   - PassWord (Admin password)
+3. **Product1 entity**:
+   - PID (Product ID)
+   - Pname (Product name)
+   - Price
+   - Quantity
+4. **OrderItems entity**:
+   - Subtotal
+   - Quantity
+   - ItemNo
+5. **Orders entity**:
+   - OID (Order ID)
+   - TransactionDate
+   - Total
+   - DeliveryFee
 [IV. Normalization ](#normalization)
 
