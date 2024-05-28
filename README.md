@@ -66,5 +66,27 @@ purchased products, the date of expected delivery, and the form of payment.
    - TransactionDate
    - Total
    - DeliveryFee
+- **Admin - Customer**:
+  - An Admin can be associated with many Customers (one-to-many relationship), indicated by the `AID` foreign key in the Customer table.
+
+- **Admin - Order**:
+  - An Admin can be associated with many Orders (one-to-many relationship), indicated by the `AID` foreign key in the Order table.
+
+- **Admin - Seller**:
+  - An Admin can be associated with many Sellers (one-to-many relationship), indicated by the `AID` foreign key in the Seller table.
+
+- **Customer - Order**:
+  - A Customer can place many Orders (one-to-many relationship), indicated by the `CID` foreign key in the Order table.
+
+- **Order - OrderItems**:
+  - An Order can have many Order Items (one-to-many relationship), indicated by the `OID` foreign key in the OrderItems table.
+
+- **Product - Sells**:
+  - A Product can be sold by many Sellers, and a Seller can sell many Products (many-to-many relationship), indicated by the Sells table acting as a junction table with foreign keys referencing Product and Seller tables.
+
+- **Customer - Searchs**:
+  - A Customer can perform many Searches, and a Product can be searched by many Customers (many-to-many relationship), indicated by the Searchs table acting as a junction table with foreign keys referencing Customer and Product tables.
+
+These relationships help organize and structure the data within the database, allowing for efficient querying and retrieval of information.
 [IV. Normalization ](#normalization)
 
