@@ -3,14 +3,32 @@
 
 [I. Introduction ☀️](#Intro)
 - [1. Background](#background)
-- This E-commerce Platform project is all about diving into the online shopping world, crafting a system that's smooth and sticks to the 3rd Normal Form (3NF) in database design. We're using SQL to handle data, Java for the user interface, and JDBC to tie it all together, creating an all-in-one solution for running an e-commerce platform.
-
-So, why this topic? Well, let's be real – online shopping is everywhere! Everyone's loving the convenience of browsing and buying from their comfy couch. That's why we're cooking up a system that's gonna cater to those needs – managing user accounts, showing off products, handling orders, and making payments quick and secure.
-
-But this project isn't just about building any old online store. It's about crafting an experience. Picture this: folks effortlessly logging in, loading up their carts with all their must-haves, hitting that buy button, and choosing how they wanna pay, whether it's with a card or good ol' cash. It's about making online shopping a breeze for everyone involved
+  
+  Nowadays, selling and buying products on Internet-based platforms is becoming more
+and more prevalent. This development has brought a wealth of data ready to retrieve,
+access, and query. Besides that, e-commerce platforms benefit both parties that take part
+in.
+A. Company: The host company can manage this enormous amount of data in
+a more effective way compared to traditional data management methods.
+B. User/ Customer: Customers are allowed to purchase products at their own
+houses with no difficulties regarding payment or shipping
 - [2. Requirements](#requirements)
+  
+**Users must be able to:**
+- Create an account with their name, user bank name, and bank account number, and set up a password.
+- Search for their required products, purchase one or more products, and check out on the payment page.
+- Receive the expected time of product arrival via email and have it displayed on the order page once payment is successful.
+
+**Admin must be able to:**
+- Create User IDs and Customer IDs.
+- Add a customer to the customer list.
+- Check the product list to see if the customers can purchase a product.
+
 
 - [3. Goals🎯](#goal)
+  This project aims to create an e-commerce platform in which customers can purchase
+one, or more products from the sellers. The result of this project can display the total of
+purchased products, the date of expected delivery, and the form of payment.
 - [4. Installation ](#install)
   
 [II. Methodology](#Method)
