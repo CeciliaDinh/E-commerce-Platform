@@ -48,18 +48,3 @@ purchased products, the date of expected delivery, and the form of payment.
 
 [IV. Normalization ](#normalization)
 
-<a name="Intro"></a>
-## I. Introduction
-<a name="background"></a>
-### 1. Background
-<a name="requirement"></a>
-### 2. Requirement
-
-<a name="goal"></a>
-### 3. Goals
-<a name="install"></a>
-### 4. Install
-<a name="Techniques"></a>
-## II. Techniques
-<a name="ERD"></a>
-## III. ERD
