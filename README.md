@@ -4,7 +4,7 @@
 [I. Introduction ☀️](#Intro)
 - [1. Background](#background)
   
-  Nowadays, selling and buying products on Internet-based platforms is becoming more
+  - Nowadays, selling and buying products on Internet-based platforms is becoming more
 and more prevalent. This development has brought a wealth of data ready to retrieve,
 access, and query. Besides that, e-commerce platforms benefit both parties that take part
 in.
@@ -14,22 +14,23 @@ B. User/ Customer: Customers are allowed to purchase products at their own
 houses with no difficulties regarding payment or shipping
 - [2. Requirements](#requirements)
   
-**Users must be able to:**
+  **Users must be able to:**
 - Create an account with their name, user bank name, and bank account number, and set up a password.
 - Search for their required products, purchase one or more products, and check out on the payment page.
 - Receive the expected time of product arrival via email and have it displayed on the order page once payment is successful.
 
-**Admin must be able to:**
+  **Admin must be able to:**
 - Create User IDs and Customer IDs.
 - Add a customer to the customer list.
 - Check the product list to see if the customers can purchase a product.
 
 
 - [3. Goals🎯](#goal)
-  This project aims to create an e-commerce platform in which customers can purchase
+  - This project aims to create an e-commerce platform in which customers can purchase
 one, or more products from the sellers. The result of this project can display the total of
 purchased products, the date of expected delivery, and the form of payment.
 - [4. Installation ](#install)
+- Please kindly clone this git https://github.com/CeciliaDinh/Principle-Of-Database-Management.git to your computer and then run it as usual
   
 [II. Methodology](#Method)
 
