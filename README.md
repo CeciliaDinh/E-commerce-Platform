@@ -1,5 +1,5 @@
-# Principle Of Database Management 
-## Topic: E-commerce Platform For Internet Banking Transactions 
+
+# E-commerce Platform For Internet Banking Transactions 
 
 [I. Introduction ☀️](#Intro)
 - [1. Background](#background)
