@@ -88,5 +88,7 @@ purchased products, the date of expected delivery, and the form of payment.
   - A Customer can perform many Searches, and a Product can be searched by many Customers (many-to-many relationship), indicated by the Searchs table acting as a junction table with foreign keys referencing Customer and Product tables.
 
 These relationships help organize and structure the data within the database, allowing for efficient querying and retrieval of information.
+
 [IV. Normalization ](#normalization)
+- This database is designed to satisfy Third Normalization (3NF). 
 
